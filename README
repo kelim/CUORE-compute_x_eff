@@ -1,0 +1,31 @@
+##### Generated: Nov-26-2014 KL
+##### Modified: Mar-24-2017 KL
+##### Modified: May-22-2017 KL
+
+Scripts to compute cut efficiency. Details on the method to obtain cut efficiency can be found in the CUORE internal note 100D.
+
+## Structure of running scripts are following:
+1. "exec_compute_x_eff.py": Python script to set the relevant variables to run the following scripts besides the cuts to be examined. Bascially by running this script, you generate "readfiles.C", "compute_x_eff.C", and "submit_jobs.pbs" from "cast_readfiles.C", "cast_compute_x_eff.C", and "cast_submit_jobs.pbs".
+
+Set the variables you want to use to obtain the cut efficiency mostly in this script, besides the cut itself you want to test.
+
+2. "job_scripts/readfiles.C": This is generated from "cast_readfiles.C". By setting proper variables from "exec_compute_x_eff.py" mostly you're good to go but you need to make sure the data file path and list name. 
+
+You need to modify "job_scripts/cast_readfiles.C" to change the path and list name. 
+
+3. "job_scripts/compute_x_eff.C": This is generated from "cast_compute_x_eff.C". Its outputs are written as results/dataset.list, C/*.C, fig/*.png.
+
+IMPORTANT: You need to set the proper cuts you want to test by setting "x_base" and "x_test". Refer "setcuts.C" to use predefined alias for each cut. 
+
+Once you have proper readfiles.C and compute_x_eff.C, then you could just run the script with "root -q -b compute_x_eff.C"
+
+4. "job_scripts/submit_jobs.pbs": This is generated from "cast_submit_jobs.pbs". It is optional but useful when you want to obtain cut efficiencies with various configuration to make comparison. readfiles.C, compute_x_eff.C, and submit_jobs.pbs will have job_id number at the end of the scripts, e.g. readfiles1.C, compute_x_eff_10.C, submit_jobs_100.pbs".
+
+
+## Folder description
+- results: Cut efficiency values with their uncertainties, dataset info, etc are written as *.list file. One could use simple "combine_lists.sh". These files could be used as input to run the scripts under "plot_x_eff".
+
+- C: contains C files
+
+- fig: contains png files
+
