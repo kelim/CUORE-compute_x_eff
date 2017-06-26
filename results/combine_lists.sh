@@ -1,0 +1,2 @@
+#!/bin/sh
+cat x_eff_OfficialProcessed_v02.30_background_BlindedReduced_*.list > x_eff_OfficialProcessed_v02.30_background_BlindedReduced_combined.list

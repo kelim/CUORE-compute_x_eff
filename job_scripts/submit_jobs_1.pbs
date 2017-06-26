@@ -1,0 +1,26 @@
+##### READ ME ######
+#Author: T.O'Donnell
+#tdonnell@berkeley.edu
+#very simple batch submission script to run a root macro
+#change the 'odonnell' stuff to your own directory 
+#
+#To submit the job do: qsub example1.pbs 
+#in the shell
+##### END OF README #####
+
+#!/bin/bash
+#PBS -m abe
+#PBS -M kyungeun.lim@yale.edu
+#PBS -q cuore
+#PBS -e localhost:/file path/PBS.e
+#PBS -o localhost:/file path/PBS.o
+
+#Source the environment file
+source /cuore/soft/bin/diana_env.sh
+#print some environment variables just to check later how they were set
+echo "HOST IS " $HOSTNAME
+printenv
+
+#actually run the script
+root -q -b job_scripts/compute_x_eff_1.C
+
